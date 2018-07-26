@@ -594,6 +594,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
+    <Content Include="app.yaml" />
     <Content Include="SportsWebPython\static\build\css\custom.css" />
     <Content Include="SportsWebPython\static\build\css\custom.min.css" />
     <Content Include="SportsWebPython\static\build\images\back_disabled.png" />
