@@ -8,7 +8,7 @@ from flask.json import JSONEncoder
 from datetime import datetime
 import dateutil.parser
 from flask import render_template,flash,redirect,url_for,request,jsonify
-from SportsWebPython import app,db,bcrypt
+from SportsWebPython import Sportsapp,db,bcrypt
 from SportsWebPython.models.models import User,Clubs,Persons,Events,Teams,Members
 from SportsWebPython.forms.forms import RegistrationForm, LoginForm, CreateClubForm,PersonForm,EventForm,TeamForm
 from wtforms.ext.appengine.db import model_form
@@ -36,16 +36,16 @@ def new_alchemy_encoder():
             return json.JSONEncoder.default(self, obj)
     return AlchemyEncoder
 
-@app.route('/')
-@app.route('/home')
+@Sportsapp.route('/')
+@Sportsapp.route('/home')
 def home():
     """Renders the home page."""
     return render_template(
         'layout2.html'
     )
 
-#@app.route('/')
-#@app.route('/home')
+#@Sportsapp.route('/')
+#@Sportsapp.route('/home')
 #def home():
 #    """Renders the home page."""
 #    return render_template(
@@ -54,7 +54,7 @@ def home():
 #        year=datetime.now().year,
 #    )
 
-@app.route('/contact')
+@Sportsapp.route('/contact')
 def contact():
     """Renders the contact page."""
     return render_template(
@@ -64,7 +64,7 @@ def contact():
         message='Your contact page.'
     )
 
-@app.route('/about')
+@Sportsapp.route('/about')
 def about():
     """Renders the about page."""
     return render_template(
@@ -74,7 +74,7 @@ def about():
         message='Your application description page.'
     )
 
-@app.route('/register', methods=['GET','POST'])
+@Sportsapp.route('/register', methods=['GET','POST'])
 def register():
     """Renders the register page."""
     form = RegistrationForm()
@@ -90,7 +90,7 @@ def register():
         title='Register', form = form
     )
 
-@app.route('/login', methods=['GET','POST'])
+@Sportsapp.route('/login', methods=['GET','POST'])
 def login():
     """Renders the register page."""
     form = LoginForm()
@@ -110,12 +110,12 @@ def login():
         title='Register', form = form
     )
 
-@app.route('/local/club<int:id>/logo')
+@Sportsapp.route('/local/club<int:id>/logo')
 def club_logo(id):
     club = Clubs.query.get_or_404(id)
     return app.response_class(club.Logo, mimetype='application/octet-stream')
 
-@app.route('/local/club', methods=['GET','POST'])
+@Sportsapp.route('/local/club', methods=['GET','POST'])
 def createclub():
     """Renders the create club page."""
     form = CreateClubForm()
@@ -136,7 +136,7 @@ def createclub():
         title='Create Club', form = form
     )
 
-@app.route('/local/clubs', methods=['GET','POST'])
+@Sportsapp.route('/local/clubs', methods=['GET','POST'])
 def clubs():
     """Renders the clubs page."""
     clubs = Clubs.query.all()
@@ -150,7 +150,7 @@ def clubs():
         title='Create Club', clubs = clubs
     )
 
-@app.route('/local/team<int:clubId>', methods=['GET','POST'])
+@Sportsapp.route('/local/team<int:clubId>', methods=['GET','POST'])
 def createteam(clubId):
     """Renders the create club page."""
     form = TeamForm()
@@ -165,7 +165,7 @@ def createteam(clubId):
         title='Create Team', form = form
     )
 
-@app.route('/local/team<int:teamId>/members', methods=['GET','POST'])
+@Sportsapp.route('/local/team<int:teamId>/members', methods=['GET','POST'])
 def editteam(teamId):
     """Renders the create club page."""
 
@@ -181,7 +181,7 @@ def editteam(teamId):
         title='Edit Team', team=team
     )
 
-@app.route('/events', methods=['GET','POST'])
+@Sportsapp.route('/events', methods=['GET','POST'])
 def events():
     """Renders the calendar page."""
     #event = Events(Id_Team=1,Subject='Prvni trenink',Date_Start=datetime.utcnow())
@@ -194,7 +194,7 @@ def events():
 
     return json.dumps(dict3)
 
-@app.route('/local/event/<string:uid>', methods=['GET','POST'])
+@Sportsapp.route('/local/event/<string:uid>', methods=['GET','POST'])
 def editevent(uid):
     """Renders the event modal page."""
     event = Events.query.filter_by(Id_Event=uid).first()
@@ -219,7 +219,7 @@ def editevent(uid):
         title='Update event', form = form,event=event,data_type=data_type
     )
 
-@app.route('/local/event/', methods=['GET','POST'])
+@Sportsapp.route('/local/event/', methods=['GET','POST'])
 def addevent():
     """Renders the event modal page."""
     #event = Events.query.filter_by(Id_Event=uid).first()
@@ -238,7 +238,7 @@ def addevent():
     )
    
 
-@app.route('/calendar', methods=['GET','POST'])
+@Sportsapp.route('/calendar', methods=['GET','POST'])
 def calendar():
     """Renders the calendar page."""
     #event = Events(Id_Team=1,Subject='Prvni trenink',Date_Start=datetime.utcnow)
@@ -249,7 +249,7 @@ def calendar():
         title='Calendar'
     )
 
-@app.route('/local/person', methods=['GET','POST'])
+@Sportsapp.route('/local/person', methods=['GET','POST'])
 def createperson():
     """Renders the create person page."""
     form = PersonForm()
@@ -274,7 +274,7 @@ def createperson():
         title='Create Person', form = form,data_type=data_type
     )
 
-@app.route('/local/persons', methods=['GET'])
+@Sportsapp.route('/local/persons', methods=['GET'])
 def persons():
     """Renders the persons page."""
     persons = Persons.query.all() 
@@ -283,12 +283,12 @@ def persons():
         title='Persons', persons = persons
     )
 
-@app.route('/local/person<int:id>/logo')
+@Sportsapp.route('/local/person<int:id>/logo')
 def person_photo(id):
     person = Persons.query.get_or_404(id)
     return app.response_class(person.Photo, mimetype='application/octet-stream')
 
-@app.route('/local/person<string:uid>', methods=['GET','POST'])
+@Sportsapp.route('/local/person<string:uid>', methods=['GET','POST'])
 def editperson(uid):
     """Renders the create person page."""
     person = Persons.query.filter_by(UID=uid).first()
@@ -308,7 +308,7 @@ def editperson(uid):
         title='Update Person', form = form,person=person,data_type=data_type
     )
 
-@app.route('/local/personsModal/<int:idteam>', methods=['GET','POST'])
+@Sportsapp.route('/local/personsModal/<int:idteam>', methods=['GET','POST'])
 def addmember(idteam):
     """Renders the event modal page."""
     persons = Persons.query.all();
@@ -334,7 +334,7 @@ def addmember(idteam):
         title='Add members',persons=persons,team=team
     )
 
-@app.route('/local/team<int:idteam>/members/add', methods=['GET','POST'])
+@Sportsapp.route('/local/team<int:idteam>/members/add', methods=['GET','POST'])
 def addteammembers(idteam):
     """Renders the event modal page."""
     team = Teams.query.filter_by(Id_Team=idteam).first();
