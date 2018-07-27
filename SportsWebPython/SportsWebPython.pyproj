@@ -142,6 +142,9 @@
     <Compile Include="SportsWebPython\lib\werkzeug\_internal.py" />
     <Compile Include="SportsWebPython\lib\werkzeug\_reloader.py" />
     <Compile Include="SportsWebPython\lib\werkzeug\__init__.py" />
+    <Compile Include="SportsWebPython\lib\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SportsWebPython\models\basemodel.py">
       <SubType>Code</SubType>
     </Compile>
