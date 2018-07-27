@@ -29,6 +29,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="main.py" />
+    <Compile Include="SportsWebPython\flask\app.py" />
+    <Compile Include="SportsWebPython\flask\blueprints.py" />
+    <Compile Include="SportsWebPython\flask\cli.py" />
+    <Compile Include="SportsWebPython\flask\config.py" />
+    <Compile Include="SportsWebPython\flask\ctx.py" />
+    <Compile Include="SportsWebPython\flask\debughelpers.py" />
+    <Compile Include="SportsWebPython\flask\globals.py" />
+    <Compile Include="SportsWebPython\flask\helpers.py" />
+    <Compile Include="SportsWebPython\flask\json\tag.py" />
+    <Compile Include="SportsWebPython\flask\json\__init__.py" />
+    <Compile Include="SportsWebPython\flask\logging.py" />
+    <Compile Include="SportsWebPython\flask\sessions.py" />
+    <Compile Include="SportsWebPython\flask\signals.py" />
+    <Compile Include="SportsWebPython\flask\templating.py" />
+    <Compile Include="SportsWebPython\flask\testing.py" />
+    <Compile Include="SportsWebPython\flask\views.py" />
+    <Compile Include="SportsWebPython\flask\wrappers.py" />
+    <Compile Include="SportsWebPython\flask\_compat.py" />
+    <Compile Include="SportsWebPython\flask\__init__.py" />
+    <Compile Include="SportsWebPython\flask\__main__.py" />
     <Compile Include="SportsWebPython\forms\forms.py" />
     <Compile Include="SportsWebPython\forms\__init__.py">
       <SubType>Code</SubType>
@@ -46,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SportsWebPython\" />
+    <Folder Include="SportsWebPython\flask\" />
+    <Folder Include="SportsWebPython\flask\json\" />
     <Folder Include="SportsWebPython\forms\" />
     <Folder Include="SportsWebPython\models\" />
     <Folder Include="SportsWebPython\static\" />

@@ -2,7 +2,6 @@
 Routes and views for the flask application.
 """
 import os
-import secrets
 import uuid
 import json
 from flask.json import JSONEncoder
